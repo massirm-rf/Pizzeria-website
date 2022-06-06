@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+
+    <link rel="stylesheet" href="../style.css">
+    <script src="livraison.js"></script>
+    <link rel="icon" href="../img/chef.png" />
+    <title>Pizza Land</title>
+</head>
+
+
+
+<body data-spy="scroll" data-target=".navbar">
+    <div id="viewer"></div>
+    <div class="container-fluid">
+        <div id="contenu" class="row">
+            <div class="contact">
+                <div class="contact-content">
+                    <div class="contact-inner">
+
+                        <div class="contact-inner-contt"><img src="../img/delivery.png" alt="img" class="image"></div>
+                        <div class="contact-inner-cont">
+
+                            <% if( !command_exist) {%>
+                                <h1>Pas de commande à livrer</h1>
+                                <p>Revenez plus tard</p>
+                                <% } else { %>
+
+                                    <h1>Les informations du client</h1>
+                                    <p>
+                                        <%=nom_client %>
+                                    </p>
+                                    <p> tel: <%= telephone_client%>
+                                    </p>
+                                    <p> adresse: <%= adresse_livraison %>
+                                    </p>
+                                    <p>
+                                        Complement d'adresse: <%= complement_adresse %>
+                                    </p>
+                                    <div id="commande_det">
+                                        <h1>Détail de la commande N°<span id="id_commande">
+                                                <%= id_commande %>
+                                            </span>
+
+                                        </h1>
+                                        <% for (let pizza of pizzas){%>
+                                            <p class="produit">
+                                                <%= pizza.nom%>
+                                                    <%= pizza.pizza_size%>
+                                                        <%= pizza.price%> €
+                                            </p>
+                                            <% } %>
+                                                <% for (let entr of entree){ %>
+                                                    <p class="produit">
+                                                        <button class="det_entree"> detail</button>
+                                                        <%= entr.nom%>
+                                                            <%= entr.price%> €
+                                                    </p>
+                                                    <div class="details">
+                                                        <%= entr.sauce%>
+                                                    </div>
+
+                                                    <% } %>
+                                                        <% for (let dess of dessert){ %>
+                                                            <p class="produit">
+                                                                <%= dess.nom%>
+                                                                    <%= dess.price%> €
+                                                            </p>
+                                                            <% } %>
+                                                                <% for (let boiss of boisson){ %>
+                                                                    <p class="produit">
+                                                                        <%= boiss.nom%>
+                                                                            <%= boiss.taille %>
+                                                                                <%= boiss.price%> €
+                                                                    </p>
+                                                                    <% } %>
+
+                                                                        <%for(let perso of pizza_perso){%>
+                                                                            <p class="produit"
+                                                                                id="<%= perso.pizza_perso_id %> ">
+                                                                                <button class="det"> detail</button>
+                                                                                Composé
+                                                                                <%= perso.size %>
+                                                                                    <%= perso.price%> €
+                                                                            </p>
+                                                                            <div class="details">
+                                                                            </div>
+                                                                            <%}%>
+                                                                                <p>Total : <%= prix_total %>€
+                                                                                </p>
+
+
+
+
+                                    </div>
+
+                                    <% if (!bool) {%> <button class=" btn" id="dispatch"> Prendre la commande en
+                                            charge</button>
+                                        <% } else{ %>
+                                            <button class=" btn" id="done"> Finaliser la livraison</button>
+                                            <% } %>
+                                                <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- fixed-bottom -->
+    <footer>
+        <div class="copyright">
+            <p id="id_livreur">
+                <%= livreur %>
+            </p>
+            <p>Copyright © 2022 Pizza Land</p>
+            <div class="social"><i class="bi bi-facebook"></i><i class="bi bi-twitter"></i><i
+                    class="bi bi-instagram"></i><i class="bi bi-youtube"></i></div>
+
+        </div>
+    </footer>
+
+
+
+</body>
+
+</html>

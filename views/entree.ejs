@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+    <link rel="stylesheet" href="../style.css">
+    <script src="style.js"></script>
+    <link rel="icon" href="../img/chef.png" />
+    <title>Pizza Land</title>
+</head>
+
+<body data-spy="scroll" data-target=".navbar">
+
+    <header>
+        </div>
+        <nav class=" sticky-top navbar navbar-expand-lg navbar-dark menu_navbar bg-dark menu-navbar-light"
+            id="menu-navbar">
+            <div class="container-fluid">
+                <a href="accueil" class="pull-left"><img src="../img/logo.png" style="height: 120px;"></a>
+
+                <!-- <a class="navbar-brand" href="index.html">Pizza <span>Land</span></a> -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu-nav"
+                    aria-controls="menu-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="fa fa-bars"></span> Menu
+                </button>
+                <div class="collapse navbar-collapse" id="menu-nav">
+                    <ul class="navbar-nav m-auto">
+                        <li id="nospiz" class="nav-item "><a href="pizzas" class="nav-link">Nos Pizzas</a></li>
+                        <li id="entree" class="nav-item active"><a href="entree" class="nav-link">Entrées</a></li>
+                        <li id="dessert" class="nav-item"><a href="desserts" class="nav-link">Desserts</a></li>
+                        <li id="bbtn" class="nav-item"><a href="boissons" class="nav-link">Boissons</a></li>
+                        <li id="nosmen" class="nav-item"><a href="#" class="nav-link">Nos Menus</a></li>
+                        <li id="about" class="nav-item"> <a href="about" class="nav-link"> About </a></li>
+                        <li id="contact" class="nav-item"><a href="contact" class="nav-link">Contact</a></li>
+                    </ul>
+                    <button type="button" class="btn btn-light"><span class="bi bi-person-fill"></span></button>
+                </div>
+                <!-- <a href="#" class="pull-right"><img src="../img/logo.png" style="height: 120px;"></a> -->
+            </div>
+
+        </nav>
+
+    </header>
+
+    <!-- <section id="carte"> -->
+    <div class="container-fluid">
+        <div id="contenu" class="row">
+            <div id="menBoiss" class="col-sm-12">
+                Nos entrées
+            </div>
+
+            <div id="boissons" class="row col-sm-12 col-md-9 col-lg-8 col-xl-9">
+                <% let i; for(i=0;i<=5;i++) {%>
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center photo">
+                        <img src=<%=`img/e` +i+`.png` %>>
+                        <div class="boisson_name">
+                            <span class="prod_name" id="<%=nom[i]%>">
+                                <%= nom[i]%>
+                            </span>
+                            <span class="prod_price">
+                                <%= prix[i] %>€
+                            </span>
+                            <span class="prod_type">
+                                entree
+                            </span>
+                            <select class="prod_sauces form-control">
+                                <% for(let j=0;j<sauce_entree.length;j++) {%>
+                                    <option value="<%=sauce_entree[j] %>" <% if(sauce[i]===sauce_entree[j]) {%> selected
+                                        <% } %>
+                                            >
+                                            <%= sauce_entree[j] %>
+                                    </option>
+                                    <% } %>
+                            </select>
+                        </div>
+                        <button class=" add btn btn-success">Ajouter </button>
+                    </div>
+                    <%}%>
+            </div>
+            <div class="col-md-3 col-lg-4 col-xl-3 col-sm-3">
+                <h1 id="panier_title">Panier</h1>
+                <nav class="navbar-expand-md navbar navbar-light navbar-expand-md sticky-top">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#panier"
+                        aria-controls="panier" aria-expanded="false" aria-label="Toggle navigation"
+                        style="color:green;">
+                        Panier
+                    </button>
+                    <!--ajouter un bouton avec icone de shoping -->
+                    <div id="panier" class="collapse navbar-collapse">
+                        <ul>
+                            <h5>Ma commande:</h5>
+                            <span id="commande">
+                                <% for (i=0;i<panier.length;i++){ if(panier[i].product_size===undefined){
+                                    panier[i].product_size="" ; } %>
+                                    <li id="<%=i%>">
+
+                                        <% if (panier[i].product_type==='Perso' ){%> <span class="prod_id">
+                                                <%=panier[i].product_id%>
+                                            </span>
+                                            <button class="dropdown-toggle" type="button" id="dropdownMenuButton"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            </button>
+                                            <% } %>
+
+                                                <span class="prod_name">
+                                                    <%= panier[i].product_name%>
+                                                </span>
+                                                <span class="prod_size">
+                                                    <%= panier[i].product_size%>
+                                                </span>
+                                                <span class="prod_price">
+                                                    <%= panier[i].product_price%>
+                                                </span>
+                                                €
+                                                <button class=" remove btn-danger bi bi-trash"></button>
+                                    </li>
+                                    <%if (panier[i].product_type==='Perso' ){%>
+                                        <div class="details">
+                                            le detail de la
+                                        </div>
+                                        <% } %>
+
+                                            <%}%>
+                            </span>
+
+                            <li>Total :<span class="total">
+                                    <%=total%> €
+                                </span></li>
+                            <button id="validate" class="btn btn-success">Commander <span class="total">
+                                    <%= total%> €</button>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="copyright">
+            <p>Copyright © 2022 Pizza Land</p>
+            <div class="social"><i class="bi bi-facebook"></i><i class="bi bi-twitter"></i><i
+                    class="bi bi-instagram"></i><i class="bi bi-youtube"></i></div>
+        </div>
+    </footer>
+
+
+
+</body>
+
+</html>
